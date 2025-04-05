@@ -1,0 +1,9 @@
+version: '3.9' # 버전
+
+services:
+  web:
+    image: my-django-gallery:latest
+    ports:
+      - "8000:8000"
+    deploy:
+      replicas: 1
