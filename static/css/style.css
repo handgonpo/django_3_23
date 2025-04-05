@@ -1,0 +1,23 @@
+/* 공통 스타일 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a.white{
+    color: #fff; 
+}
+p.textCenter a{
+    text-align: center;
+}
+
+/* 헤더 전체 */
+.header  {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #218838;
+    color: #fff;
+}
