@@ -1,23 +1,214 @@
-/* 공통 스타일 */
-a {
-    text-decoration: none;
-    color: inherit;
-}
-a.white{
-    color: #fff; 
-}
-p.textCenter a{
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 헤더 전체 */
-.header  {
-    max-width: 600px;
-    margin: 0 auto;
+body {
+    background-color: #FAFAFA;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-width: 1000px;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+.search-input {
+    width: 400px;
+}
+
+.nav-icons  {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 40px; 
+}
+
+.nav-icons a,
+.nav-icons span {
+    display: flex;             /* 아이콘 내부 요소도 정렬 */
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.main-content {
+    display: flex;
+    padding-top: 80px;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.feed-container {
+    width: 65%;
+    margin-right: 10%;
+}
+
+.feed_box {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.feed-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.feed-image img {
+    width: 100%;
+    height: auto;
+}
+
+.feed-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.favorite {
+    color: red;
+}
+
+.feed-likes,
+.feed-content,
+.reply-item {
+    padding: 0 15px;
+    text-align: left;
+}
+
+.reply-input-container {
+    display: flex;
+    border-top: 1px solid #eee;
+    padding: 10px 15px;
+}
+
+.reply-input {
+    flex: 1;
+    border: none;
+    outline: none;
+}
+
+.upload_reply {
+    color: cornflowerblue;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/*user upload*/
+
+.sidebar {
+    width: 24%;
+    background-color: #f5f5f5;
     padding: 20px;
-    background-color: #218838;
-    color: #fff;
+    border-left: 1px solid #ddd;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.box.sidebar-profile-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    background-color: #eaeaea;
+}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-nickname {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #777;
+}
+
+.box {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-box {
+    width: 35px;
+    height: 35px;
+}
+
+.nav-icons .profile-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-box-feed {
+    width: 40px;
+    height: 40px;
+}
+
+.sidebar-profile-box {
+    width: 60px;
+    height: 60px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+}
+
+.footer a {
+    text-decoration: none;
+    color: gray;
 }
