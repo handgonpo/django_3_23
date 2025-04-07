@@ -1,2 +1,4 @@
 Django==5.1.7
+djangorestframework==3.16.0
+Pillow>=10.0.0
 
