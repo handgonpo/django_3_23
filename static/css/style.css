@@ -1,7 +1,9 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: left;
 }
 
 body {
@@ -9,14 +11,15 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.navbar {
+/* Header */
+.navbar-fixed {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 1000;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
-    padding: 10px 20px;
+    padding: 10px 7%;
 }
 
 .navbar-container {
@@ -27,28 +30,35 @@ body {
 }
 
 .navbar-brand img {
-    height: 40px;
-    width: auto;
+    width: 193px;
+    height: auto;
 }
 
 .search-input {
     width: 400px;
 }
 
-.nav-icons  {
+.nav-icons {
     display: flex;
     align-items: center;
     gap: 15px;
-    height: 40px; 
 }
 
 .nav-icons a,
 .nav-icons span {
-    display: flex;             /* 아이콘 내부 요소도 정렬 */
-    align-items: center;
-    justify-content: center;
     color: black;
     font-size: 24px;
+    cursor: pointer;
+}
+
+.nav-icons a{
+    margin-top: 10px;
+}
+.nav-icons span{
+    margin-top: 9px;
+}
+
+.cursor-pointer {
     cursor: pointer;
 }
 
@@ -57,16 +67,38 @@ body {
     left: auto;
 }
 
+.box {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.profile.Psize{
+    width:30px;
+    height:30px;
+}
+.profile_rec_user{
+    width:30px;
+    height:30px;
+}
+.profile_user{
+    width: 90px;
+    height: 90px;
+}
+
+/* Feed Layout */
 .main-content {
     display: flex;
     padding-top: 80px;
     justify-content: center;
     min-height: 100vh;
-}
-
-.feed-container {
-    width: 65%;
-    margin-right: 10%;
 }
 
 .feed_box {
@@ -84,13 +116,15 @@ body {
 
 .feed-image img {
     width: 100%;
-    height: auto;
+    height: 400px;
+    object-fit: cover;
+    margin: 0 auto;
 }
 
 .feed-actions {
     display: flex;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 20px 4%;
 }
 
 .favorite {
@@ -100,62 +134,42 @@ body {
 .feed-likes,
 .feed-content,
 .reply-item {
-    padding: 0 15px;
-    text-align: left;
+    padding: 2px 15px;
 }
 
 .reply-input-container {
     display: flex;
     border-top: 1px solid #eee;
-    padding: 10px 15px;
+    padding: 15px 30px;
 }
 
 .reply-input {
     flex: 1;
     border: none;
     outline: none;
+    text-align: center;
 }
 
 .upload_reply {
     color: cornflowerblue;
     cursor: pointer;
-    margin-left: 10px;
 }
 
-/*user upload*/
-
-.sidebar {
-    width: 24%;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-left: 1px solid #ddd;
-}
-
+/* Sidebar */
 .user-profile {
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.box.sidebar-profile-box {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #ccc;
-    background-color: #eaeaea;
-}
-
-.profile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    gap: 14px;
+    width: 52%;
 }
 
 .user-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    width: 200px;
+}
+.profile-box{
+    width: 45px;;
 }
 
 .user-nickname {
@@ -168,47 +182,175 @@ body {
     color: #777;
 }
 
-.box {
-    border-radius: 50%;
-    overflow: hidden;
+/* Util */
+.me-3 {
+    margin-right: 1rem !important;
 }
 
-.profile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.me-2 {
+    margin-right: 0.5rem !important;
 }
 
-.profile-box {
-    width: 35px;
-    height: 35px;
+/* Main Layout with Feed and Sidebar */
+.main-layout {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+    background-color: #FAFAFA;
+    margin-top: 60px;
 }
 
-.nav-icons .profile-box {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    overflow: hidden;
+.feed-container {
+    width: 600px;
+    margin-right: 5%;
 }
 
-.profile-box-feed {
-    width: 40px;
-    height: 40px;
-}
-
-.sidebar-profile-box {
-    width: 60px;
-    height: 60px;
-}
-
-.footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
+.sidebar {
+    width: 470px;
     background-color: #f5f5f5;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    text-align: left;
+    position: relative; /* ✅ fixed → relative */
+    left: auto;          /* ✅ left: 62% 제거 */
+    z-index: auto;
 }
 
-.footer a {
-    text-decoration: none;
+.rec_font{
+    margin-top: 33px;
+    margin-left: 5px;
+    margin-bottom: -8px;
+    font-size: 18px;
+}
+
+.sidebar .user-profile,
+.sidebar .recommendation-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.sidebar .user-info {
+    margin-left: 10px;
+    text-align: left;
+}
+
+.sidebar .user-nickname {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.sidebar .user-description {
     color: gray;
+    font-size: 14px;
+}
+
+.sidebar a {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(0, 0, 253);
+    width: 57px;
+    text-align: center;
+}
+.modu{
+    color: #000 !important;
+}
+
+.sidebar .footer-info {
+    margin-top: 40px;
+    font-size: 12px;
+    color: gray;
+}
+
+.sidebar .footer-info:last-child {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.follow-btn{
+    background-color: #ffffff00;
+    color: #0200ff;
+    border: none;
+}
+.nickname-edit-wrap {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 10px; /* 닉네임과 버튼 사이 간격 */
+}
+
+.firstN {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 12px;
+    margin-right: 13px;
+}
+
+.profile_edit {
+    padding: 4px 10px;
+    font-size: 13px;
+    height: 30px;
+    line-height: 1;
+}
+.oneTalk{
+    width: 118px !important;
+    border: none;
+    margin-left: -8px;
+}
+
+/* 유저한마디 섹션 */
+.sidebar .one-talk-section {
+    margin-top: 30px;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+.sidebar .one-talk-label {
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* 한 줄 배치 스타일 */
+.sidebar .one-talk-inline {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* 입력창 */
+.sidebar .one-talk-inline input[type="text"] {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 14px;
+    background-color: white;
+    color: #333;
+}
+
+/* 버튼 */
+.sidebar .one-talk-inline button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px 23px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar .one-talk-inline button:hover {
+    background-color: #2f80ed;
+}
+
+.userDesName{
+    font-size: 24px !important;
+    margin-top: 41px;
 }

@@ -1,0 +1,25 @@
+.auth-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.auth-box, .auth-box-alt {
+    background: white;
+    border: 1px solid #dbdbdb;
+    width: 300px;
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.auth-logo {
+    width: 150px;
+}
+
+.auth-description {
+    font-weight: bold;
+    color: gray;
+    padding-bottom: 20px;
+}

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>로그인</title>
+
+    <!-- CSRF token -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body style="background: #FAFAFA">
+<div class="auth-wrapper">
+    <div class="auth-box">
+        <div class="auth-logo-wrapper">
+            <img class="auth-logo" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
+        </div>
+        <div class="auth-description">친구들의 사진과 동영상을 보려면 로그인하세요.</div>
+
+        <!-- ✅ form 태그로 감싸기 -->
+        <form id="login-form" method="post" onsubmit="return false;">
+            {% csrf_token %}
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="input_email" autocomplete="email" placeholder="이메일" required>
+                <label for="input_email">이메일 주소</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="input_password" autocomplete="current-password" placeholder="비밀번호" required>
+                <label for="input_password">비밀번호</label>
+            </div>
+
+            <button id="login_button" type="button" class="btn btn-primary w-100">로그인</button>
+        </form>
+    </div>
+
+    <div class="auth-box-alt">
+        계정이 없으신가요? <a href="/user/join/">가입하기</a>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 로그인 JS -->
+<script>
+    // CSRF 토큰 가져오기
+    function getCSRFToken() {
+        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    }
+
+    // Ajax 요청 시 CSRF 토큰 자동 포함
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", getCSRFToken());
+        }
+    });
+
+    // 로그인 버튼 클릭 시 Ajax로 로그인 요청
+    document.getElementById("login_button").addEventListener("click", () => {
+        const email = document.getElementById("input_email").value;
+        const password = document.getElementById("input_password").value;
+
+        if (!email || !password) {
+            alert("이메일과 비밀번호를 모두 입력해주세요.");
+            return;
+        }
+
+        $.ajax({
+            url: "/user/login/",
+            method: "POST",
+            data: {
+                email: email,
+                password: password
+            },
+            success: function () {
+                alert("로그인 성공!");
+                window.location.href = "/";
+            },
+            error: function () {
+                alert("로그인 실패! 이메일 또는 비밀번호를 확인하세요.");
+            }
+        });
+    });
+</script>
+</body>
+</html>

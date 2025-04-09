@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-picture">
+                {% if user.profile.profile_image %}
+                    <img class="profile" src="{{ user.profile.profile_image.url }}">
+                {% else %}
+                    <img class="profile" src="/media/profiles/default_profile.png">
+                {% endif %}
+            </div>
+            <div class="profile-info">
+                <h2>{{ profile_user.profile.nickname }}</h2>
+                <div class="nickname-edit-wrap">
+                    <p class="firstN"><strong>{{ profile_user.first_name }}</strong></p>
+                  
+                    <!-- 본인 프로필이면 사진 편집 버튼 -->
+                    <button id="button_profile_upload" class="btn btn-outline-secondary profile_edit">프로필 사진 편집</button>         
+                </div>
+                <input type="file" id="input_fileupload" onchange="profile_upload();" style="display: none" />
+                <p>게시물 {{ feed_list|length }} · {{ follower_count }} 팔로워  · 팔로잉 {{ following_count }}</p>
+            </div>
+        </div>
+
+        <div class="profile-tabs">
+            <div id="button_feed_list" class="profile-tab active">
+                <span class="material-icons-outlined">grid_on</span> 내 게시물
+            </div>
+            <div id="button_feed_like_list" class="profile-tab">
+                <span class="material-icons-outlined">favorite_border</span> 좋아요
+            </div>
+            <div id="button_feed_bookmark_list" class="profile-tab">
+                <span class="material-icons-outlined">bookmark_border</span> 북마크
+            </div>
+        </div>
+
+        <div id="feed_list" class="feed-grid">
+            {% for feed in feed_list %}
+                <div class="feed-thumbnail">
+                    <img src="{{ feed.image.url }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="like_feed_list" class="feed-grid" style="display: none;">
+            {% for feed in like_feed_list %}
+                <div class="feed-thumbnail">
+                    <img src="{{ feed.image.url }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="bookmark_feed_list" class="feed-grid" style="display: none;">
+            {% for feed in bookmark_feed_list %}
+                <div class="feed-thumbnail">
+                    <img src="{{ feed.image.url }}">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

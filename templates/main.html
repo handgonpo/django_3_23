@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-layout">
+
+    <!-- 왼쪽 피드 -->
+    <div class="feed-container">
+        {% if feeds %} {# 검색 결과가 있을 경우만 출력 #}
+        {% for feed in feeds %}
+        <div class="feed_box">
+
+            <div class="feed-header">
+                <div class="profile-box-feed">
+                    <img class="profile" src="{% get_media_prefix %}{{ feed.profile_image }}">
+                </div>
+                <div style="margin-left: 10px;">{{ feed.nickname }}</div>
+            </div>
+
+            <div class="feed-image">
+                <img src="{% get_media_prefix %}{{ feed.image }}">
+            </div>
+
+            <div class="feed-actions">
+                <span id="favorite_{{ feed.id }}" data-feed_id="{{ feed.id }}" class="favorite material-icons-outlined"
+                    style="cursor: pointer;">
+                    {% if feed.is_liked %}favorite{% else %}favorite_border{% endif %}
+                </span>
+                <span id="bookmark_{{ feed.id }}" data-feed_id="{{ feed.id }}" class="bookmark material-icons-outlined"
+                    style="cursor: pointer;">
+                    {% if feed.is_marked %}bookmark{% else %}bookmark_border{% endif %}
+                </span>
+            </div>
+
+            <!--.html()로 해당 엘리먼트를 업데이트할 수 있음-->
+            <div class="feed-likes" id="like_info_{{ feed.id }}">
+                {{ feed.first_liker }} <b>외 {{ feed.like_count }}명</b>이 좋아합니다.
+            </div>
+            <div class="feed-content"><b>{{ feed.nickname }}</b> {{ feed.content }}</div>
+
+            <div id="reply_list_{{ feed.id }}">
+                {% for reply in feed.reply_list %}
+                <div class="reply-item">
+                    <b>{{ reply.nickname }}</b> {{ reply.reply_content }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="reply-input-container">
+                <input id="reply_{{ feed.id }}" type="text" class="reply-input form-control" placeholder="댓글 달기..">
+                <div data-feed_id="{{ feed.id }}" class="upload_reply">게시하기</div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <!--검색 결과 없을 경우 메시지 -->
+        <p class="no-result">검색 결과가 없습니다.</p>
+        {% endif %}
+    </div>
+
+    <!-- 오른쪽 사이드바 -->
+    <div class="sidebar">
+        <!-- 로그인한 사용자 정보 -->
+
+        {% if user.is_authenticated %} {# 로그인한 경우만 출력 #}
+        <div class="user-profile">
+            <div class="sidebar-profile-box">
+                {% if user.profile.profile_image %}
+                <img class="profile profile_user" src="{{ user.profile.profile_image.url }}" alt="profile">
+                {% else %}
+                <img class="profile profile_user" src="{% static 'images/default_profile.png' %}" alt="default">
+                {% endif %}
+            </div>
+            <div class="user-info">
+                <div class="user-nickname">{{ user.profile.nickname }}</div>
+                <div class="user-description userDesName">{{ user.first_name }}</div>
+            </div>
+        </div>
+
+        <!-- 유저한마디 작성 영역 -->
+        <div class="one-talk-section">
+            <form method="post" action="{% url 'user:edit_profile' %}" class="one-talk-form">
+                {% csrf_token %}
+                <label for="intro_message" class="one-talk-label">유저한마디</label>
+                <div class="one-talk-inline">
+                    <input type="text" id="intro_message" name="intro_message" value="{{ user.profile.intro_message }}" placeholder="한마디를 입력하세요">
+                    <button type="submit">저장</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 추천 유저 헤더 -->
+        <div class="d-flex justify-content-between rec_font">
+            <span style="font-weight: bold; color: gray;">회원님을 위한 추천</span>
+            <a class="modu" href="#">모두보기</a><!-- 모두보기 링크 -->
+        </div>
+
+        <!-- 추천 유저 리스트 -->
+        {% for rec_user in recommend_users %}
+        <div class="recommendation-item">
+            <div class="user-profile">
+                <div class="profile-box">
+                    {% if rec_user.profile.profile_image %}
+                    <img class="profile profile_rec_user" src="{{ rec_user.profile.profile_image.url }}" alt="profile">
+                    {% else %}
+                    <img class="profile profile_rec_user" src="{% static 'images/default_profile.png' %}" alt="default">
+                    {% endif %}
+                </div>
+                <div class="user-info">
+                    <div class="user-nickname">{{ rec_user.profile.nickname }}</div>
+
+                    <div class="user-description">
+                        {{ rec_user.profile.intro_message|default:"한마디를 입력해주세요!" }}
+                    </div>
+                </div>
+            </div>
+
+            <!--<a href="#">팔로우</a> 팔로우 버튼 -->
+            {% if user != rec_user %}
+            <button type="button" class="btn btn-primary follow-toggle-btn" data-followee-id="{{ rec_user.id }}"
+                data-url="{% url 'interaction:follow_toggle' %}">
+                팔로우
+            </button>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>추천 유저가 없습니다.</p>
+        {% endfor %}
+
+        <div class="footer-info">2025 멋쟁이 사자처럼 인스타 페북</div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

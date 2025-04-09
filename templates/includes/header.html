@@ -1,0 +1,44 @@
+{% load static %}
+<!-- templates/includes/header.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed">
+    <div class="container-fluid navbar-container">
+        <!-- 로고 -->
+        <a class="navbar-brand" href="{% url 'main' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </a>
+
+        <!-- 검색창 -->
+        <form method="get" action="{% url 'main' %}" class="search-form d-flex" style="margin: 20px 0;">
+            <input class="form-control me-2 search-input" name="q" type="search" placeholder="Search"
+                value="{{ request.GET.q }}" aria-label="Search">
+            <button type="submit" class="btn btn-outline-success">검색</button>
+        </form>
+        <!--검색창 끝 -->
+
+        <!-- 아이콘 및 프로필 -->
+        <div class="nav-icons">
+            <!-- 홈 아이콘 -->
+            <a href="{% url 'main' %}" class="text-dark">
+                <span class="material-icons">home</span>
+            </a>
+
+            <!-- 추가 버튼 -->
+            <span id="nav_bar_add_box" class="material-icons-outlined cursor-pointer">add_box</span>
+
+            <!-- 프로필 드롭다운 -->
+            <div class="dropdown">
+                <a href="#" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="box">
+                        <img src="{{ user.profile.profile_image.url|default:'/media/profiles/default_profile.png' }}"
+                             class="profile Psize" alt="프로필 이미지">
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="{% url 'port:profile' %}">프로필</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'user:logout' %}">로그아웃</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,16 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-{% include 'head.html' %}
-<body>
-    {% include 'header.html' %} 
+<head>
+    {% include 'includes/head.html' %}
+</head>  
 
-    {% block content %} 
+<body style="background: #FAFAFA" data-email="{{ user.email }}"> <!--왜 여기에 data를 넣어야 해결되는지 궁금-->
 
-    {% endblock %}
+    <!-- 헤더 (네비게이션 바) -->
+    {% include 'includes/header.html' %}
 
-    {% include 'footer.html' %} 
+     <!-- 실제 페이지 콘텐츠 -->
+    {% block content %}{% endblock %}
 
-    {% block extra_script %}
-    {% endblock %} 
+    <!-- 모달 포함 -->
+    {% include 'includes/modals.html' %}
+
+    <!-- 푸터 -->
+    {% include 'includes/footer.html' %}
+
 </body>
 </html>
